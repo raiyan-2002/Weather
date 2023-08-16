@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <main class="form-container py-3" style = "font-size:20px">
+        <form method="post" action="/results">
+            <input class = "round" placeholder = "City" autofocus autocomplete = "off"  type="text" name="city" id="city"/>
+            <button class="btn-primary round" type="submit">Search</button>
+        </form>
+    </main>
+    <div class = "container-fluid py-1 text-center">
+        <h1 style = "font-size:75px">{{data["city"]}}</h1>
+        <div style = "font-size: 20px">{{day}}</div>
+        <div style = "font-size: 20px">{{times["time"]}} </div>
+        <img src={{main}} width = "200px" height = "auto">
+        <br>
+        <div style = "font-size: 80px" >{{data["temp"]}}</div>
+        <h3>L:{{data["low"]}} &nbsp;H:{{data["high"]}}</h3>
+        <div style = "font-size: 20px">{{description}}</div>
+    </div>
+    <br>
+    <div class="cont">
+        <div class="left-column">
+            <div class="box" style = "text-align: center">
+                <div>
+                    <div style = "font-size: 20px"><b>Wind Speed</b></div>
+                    <img src={{icons[0]}} width = "50px" height = "auto">
+                    <div>{{data["windspeed"]}} {{data["direction"]}}</div>
+                </div>
+            </div>
+            <br>
+            <div class="box" style = "text-align: center">
+                <div>
+                    <div style = "font-size: 20px"><b>Air Pressure</b></div>
+                    <img src={{icons[1]}} width = "50px" height = "auto">
+                    <div>{{data["pressure"]}} hPa</div>
+                </div>
+            </div>
+            <br>
+            <div class="box" style = "text-align: center">
+                <div>
+                    {% if sun == "/static/Sunrise.png" %}
+                        <div style = "font-size: 20px"><b>Sunrise</b></div>
+                        <img src={{sun}} width = "50px" height = "auto">
+                        <div>{{times["sunrise"]}}</div>
+                        <div>Sunset: {{times["sunset"]}}</div>
+                    {% else %}
+                        <div style = "font-size: 20px"><b>Sunset</b></div>
+                        <img src={{sun}} width = "50px" height = "auto">
+                        <div>{{times["sunset"]}}</div>
+                        <div>Sunrise: {{times["sunrise"]}}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="box" style = "text-align: center">
+                <div>
+                    <div style = "font-size: 20px"><b>Humidity</b></div>
+                    <img src={{icons[2]}} width = "50px" height = "auto">
+                    <div>{{data["humidity"]}}%</div>
+                </div>
+            </div>
+            <br>
+            <div class="box" style = "text-align: center">
+                <div>
+                    <div style = "font-size: 20px"><b>Feels Like</b></div>
+                    <img src={{icons[3]}} width = "50px" height = "auto">
+                    <div>{{data["feels"]}}</div>
+                </div>
+            </div>
+            <br>
+            <div class="box" style = "text-align: center">
+                <div>
+                    <div style = "font-size: 20px"><b>UV Index</b></div>
+                    <img src={{icons[4]}} width = "50px" height = "auto">
+                    <div>{{data["uv"]}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <main class="form-container py-3">
+        <form method="post" action="/default">
+            <input type="hidden" name="default" id="default" value = "{{data['city']}}"/>
+            <button class="btn-primary round" type="submit">Make Default</button>
+        </form>
+        <br>
+        <form method="get" action="/">
+            <button class="btn-primary round" type="submit">Go to Default</button>
+        </form>
+    </main>
+    <main class="form-container py-3">
+        <form method="post" class = "form-inline" action="/units">
+            <a style = "font-size:17px">Preferences:</a>
+            <select class="mb-3 mx-auto w-auto center round" id = "temp" name = "temp">
+                {% if session["temp"] == "C" %}
+                    <option value = "C">
+                        Celsius
+                    </option>
+                    <option value = "F">
+                        Fahrenheit
+                    </option>
+                {% else %}
+                    <option value = "F">
+                        Fahrenheit
+                    </option>
+                    <option value = "C">
+                        Celsius
+                    </option>
+                {% endif %}
+            </select>
+            <select class="mb-3 mx-auto w-auto center round" id = "speed" name = "speed">
+                {% if session["speed"] == "K" %}
+                    <option value = "K">
+                        km/h
+                    </option>
+                    <option value = "M">
+                        mph
+                    </option>
+                {% else %}
+                    <option value = "M">
+                        mph
+                    </option>
+                    <option value = "K">
+                        km/h
+                    </option>
+                {% endif %}
+            </select>
+            <select class="mb-3 mx-auto w-auto center round" id = "time" name = "time">
+                {% if session["time"] == "24" %}
+                    <option value = "24">
+                        24-hour
+                    </option>
+                    <option value = "12">
+                        12-hour
+                    </option>
+                {% else %}
+                    <option value = "12">
+                        12-hour
+                    </option>
+                    <option value = "24">
+                        24-hour
+                    </option>
+                {% endif %}
+            </select>
+            <input type="hidden" name="current" id="current" value = "{{data['city']}}"/>
+            <button class="btn-primary round" type="submit">Save</button>
+        </form>
+    </main>
+{% endblock %}
+

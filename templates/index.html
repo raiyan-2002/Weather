@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid justify-content-center">
+        <a class = "navbar-brand" href="/"><h1>&nbsp;Weather</h1></a>
+    </div>
+</nav>
+<main class="form-container">
+    <form method="post" action="/results">
+        <input class = "form-control-lg round" placeholder = "City" autofocus autocomplete = "off"  type="text" name="city" id="city"/>
+        <button class="btn-primary round btn-lg" type="submit">Search</button>
+    </form>
+</main>
+{% endblock %}

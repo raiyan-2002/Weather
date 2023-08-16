@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid justify-content-center">
+        <a class = "navbar-brand" href="/"><h1>&nbsp;Weather</h1></a>
+    </div>
+</nav>
+<main class="container-fluid py-3 text-center">
+    <main class="form-container">
+        <form method="post" action="/results">
+            <input class = "form-control-lg" style = "border-radius: 8px" placeholder = "City" autofocus autocomplete = "off"  type="text" name="city" id="city"/>
+            <button class="btn-primary round btn-lg" type="submit">Search</button>
+        </form>
+    </main>
+    <br>
+    <h3>{{error}}</h3>
+    <br>
+    <img src="/static/SAD.gif" width = "50%" height = "auto">
+    <main class="form-container py-3">
+        <form method="get" action="/">
+            <button class="btn-primary round" type="submit">Go to Default</button>
+        </form>
+    </main>
+</main>
+{% endblock %}

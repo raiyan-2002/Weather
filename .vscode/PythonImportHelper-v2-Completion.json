@@ -1,0 +1,215 @@
+[
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "flask_session",
+        "description": "flask_session",
+        "isExtraImport": true,
+        "detail": "flask_session",
+        "documentation": {}
+    },
+    {
+        "label": "lookup",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "fahrenheit",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "mph",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "hour",
+        "importPath": "helpers",
+        "description": "helpers",
+        "isExtraImport": true,
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "ZoneInfo",
+        "importPath": "zoneinfo",
+        "description": "zoneinfo",
+        "isExtraImport": true,
+        "detail": "zoneinfo",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    if \"temp\" not in session:\n        session[\"temp\"] = \"C\"\n        session[\"time\"] = \"24\"\n        session[\"speed\"] = \"K\"\n        session[\"default\"] = None\n        session[\"current\"] = None\n        session[\"input\"] = False\n    if session[\"default\"] == None:\n        return render_template(\"index.html\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "results",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def results():\n    if \"default\" not in session or \"input\" not in session:\n        session[\"default\"] = None\n        session[\"input\"] = False\n    if request.method == \"POST\":\n        city = request.form.get(\"city\")\n    elif request.method == \"GET\":\n        if session[\"input\"] == True:\n            city = session[\"current\"]\n            session[\"input\"] = False",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "default",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def default():\n    if request.method == \"GET\":\n        return redirect(\"/\")\n    elif request.method == \"POST\":\n        session[\"default\"] = request.form.get(\"default\")\n        return redirect(\"/results\")\n@app.route(\"/units\", methods=[\"GET\", \"POST\"])\ndef units():\n    if request.method == \"GET\":\n        return redirect(\"/\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "units",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def units():\n    if request.method == \"GET\":\n        return redirect(\"/\")\n    elif request.method == \"POST\":\n        session[\"input\"] = True\n        for i in [\"current\", \"temp\", \"speed\", \"time\"]:\n            session[i] = request.form.get(i)\n        return redirect(\"/results\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\n# Configure session to use filesystem (instead of signed cookies)\napp.config[\"SESSION_PERMANENT\"] = False\napp.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n@app.route(\"/\", methods=[\"GET\"])\ndef index():\n    if \"temp\" not in session:\n        session[\"temp\"] = \"C\"\n        session[\"time\"] = \"24\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SESSION_PERMANENT\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SESSION_PERMANENT\"] = False\napp.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n@app.route(\"/\", methods=[\"GET\"])\ndef index():\n    if \"temp\" not in session:\n        session[\"temp\"] = \"C\"\n        session[\"time\"] = \"24\"\n        session[\"speed\"] = \"K\"\n        session[\"default\"] = None",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SESSION_TYPE\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SESSION_TYPE\"] = \"filesystem\"\nSession(app)\n@app.route(\"/\", methods=[\"GET\"])\ndef index():\n    if \"temp\" not in session:\n        session[\"temp\"] = \"C\"\n        session[\"time\"] = \"24\"\n        session[\"speed\"] = \"K\"\n        session[\"default\"] = None\n        session[\"current\"] = None",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "convert",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def convert(s):\n    if s[-2:] ==\"PM\":\n        s = s.split(\":\")\n        s[0] = str(int(s[0]) + 12)\n        s = s[0] + \":\" + s[1] + \":\" + s[2]\n    elif s[-2:] == \"AM\":\n        copy = s.split(\":\")\n        if int(copy[0]) < 10:\n            s = \"0\" + s\n    return s[:8]",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "fahrenheit",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def fahrenheit(temp):\n    return int(((1.8 * temp) + 32))\ndef mph(speed):\n    return round((1.6 * speed), 1)\ndef hour(t):\n    if (int(t[0:2]) < 12):\n        if t[0] == \"0\":\n            t = t[1:]\n        t += \" AM\"\n    elif (int(t[0:2]) == 12):",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "mph",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def mph(speed):\n    return round((1.6 * speed), 1)\ndef hour(t):\n    if (int(t[0:2]) < 12):\n        if t[0] == \"0\":\n            t = t[1:]\n        t += \" AM\"\n    elif (int(t[0:2]) == 12):\n        t += \" PM\"\n    else:",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "hour",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def hour(t):\n    if (int(t[0:2]) < 12):\n        if t[0] == \"0\":\n            t = t[1:]\n        t += \" AM\"\n    elif (int(t[0:2]) == 12):\n        t += \" PM\"\n    else:\n        a = int(t[0:2]) - 12\n        t = str(a) + t[2:] + \" PM\"",
+        "detail": "helpers",
+        "documentation": {}
+    },
+    {
+        "label": "lookup",
+        "kind": 2,
+        "importPath": "helpers",
+        "description": "helpers",
+        "peekOfCode": "def lookup(city):\n    base1 = \"http://api.openweathermap.org/data/2.5/weather?\"\n    api_key1 = \"e0793fd94e02bda0b4af573b56e81f93\"\n    url1 = base1 + \"appid=\" + api_key1 + \"&q=\" + city\n    base2 = \"http://api.weatherapi.com/v1/current.json?\"\n    api_key2 = \"18ec44f9acf04c2b9cf204420230106\"\n    url2 = base2 + \"key=\" + api_key2 + \"&q=\" + city\n    base3 = \"https://api.sunrisesunset.io/json?\"\n    try:\n        response1 = requests.get(url1).json()",
+        "detail": "helpers",
+        "documentation": {}
+    }
+]
